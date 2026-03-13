@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 # Загружаем переменные из .env файла
 load_dotenv()
 
+
 class PostgresHandler:
     def __init__(self, configs):
         self.pg_link = os.getenv(configs)
