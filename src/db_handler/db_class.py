@@ -14,7 +14,6 @@ class PostgresHandler:
         # self.user = os.getenv("POSTGRES_USER")
         # self.password = os.getenv("POSTGRES_PASSWORD")
         self.connection = None
-
     def connect(self):
         """Устанавливает соединение с базой данных."""
         try:
@@ -32,6 +31,8 @@ class PostgresHandler:
             print(f"Ошибка подключения: {e}")
             self.connection = None
 
+
+
     def execute_query(self, query, params=None, fetch=False):
         """Выполняет SQL-запрос."""
         self.connect()
@@ -40,8 +41,10 @@ class PostgresHandler:
             try:
                 with self.connection.cursor() as cursor:
                     cursor.execute(query, params)
+                    print("выполнение запроса создания таблицы")
                     if fetch:
                         result = cursor.fetchall()
+                        print(result)
                     self.connection.commit()
             except Error as e:
                 print(f"Ошибка выполнения запроса: {e}")
@@ -57,3 +60,13 @@ class PostgresHandler:
     def __del__(self):
         """Деструктор для закрытия соединения."""
         self.close()
+
+def create_table_create():
+    create_table_query = """
+        CREATE TABLE IF NOT EXISTS customer (
+            id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            number_phone TEXT NOT NULL
+        );
+        """
+    return create_table_query

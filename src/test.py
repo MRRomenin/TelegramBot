@@ -1,6 +1,6 @@
 import sqlalchemy
 
-db_url = "postgresql://roman:roman@localhost:5432/db_telegram"
+db_url = "postgresql://roman:1712@localhost:5432/db_telegram_bot"
 
 try:
     engine = sqlalchemy.create_engine(db_url)
