@@ -6,7 +6,6 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from decouple import config
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-
 from db_handler.db_class import PostgresHandler
 
 
@@ -25,3 +24,5 @@ def create_bot() -> Bot:
 def get_dispatcher() -> Dispatcher:
     dp = Dispatcher(storage=MemoryStorage())
     return dp
+
+
