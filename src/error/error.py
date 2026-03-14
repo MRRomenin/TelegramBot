@@ -1,0 +1,2 @@
+class ErrorLing(Exception):
+    pass
