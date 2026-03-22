@@ -22,7 +22,7 @@ async def main():
 
     try:            # redo too
         pool = Parser('PG_LINK')
-        print(pool.parser_url())
+        # print(pool.parser_url())
     except ErrorLing as e:
         print(f"not correct the link {e}")
         raise
@@ -34,7 +34,7 @@ async def main():
     # dp.message.middleware(DbMiddleware(pool))
     await dp.start_polling(bot)
 
-
+# maybe app pool for queries
 # class DbMiddleware:
 #     def __init__(self, pool):
 #         self.pool = pool

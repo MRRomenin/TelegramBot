@@ -12,7 +12,6 @@ load_dotenv()
 # maybe a separate file
 def add_message() -> str:
     """Записывает сообщение в БД."""
-    # print(text)
     return "INSERT INTO customer (name, number_phone) VALUES ($1, $2)"
 
 
@@ -33,7 +32,7 @@ class PostgresHandler:
             self.connection = None
 
 
-    async def create_table_create(self):
+    async def create_table_create(self) -> str:
         create_table_query = """
             CREATE TABLE IF NOT EXISTS customer (
                 id SERIAL PRIMARY KEY,
@@ -43,23 +42,18 @@ class PostgresHandler:
             """
         return create_table_query
 
-    async def execute_query(self, username, text):
+    async def execute_query(self, username, text) -> None:
         """Выполняет SQL-запрос."""
         await self.connect()
         query_add = add_message()
-        result = None
         if self.connection:
             try:
-                # print("dsjdf")
                 await self.connection.execute(query_add, username, text)
                 print("выполнение запроса записи в customer")
                 # self.connection.commit()
             except ErrorConnect as e:
                 print(f"Ошибка выполнения запроса: {e}")
                 # self.connection.rollback()
-        return result
-
-
 
 
         # await message.answer("Сообщение сохранено в базе данных!")
@@ -68,8 +62,6 @@ class PostgresHandler:
         #         "INSERT INTO messages (user_id, name, number_phone) VALUES ($1, $2, $3)",
         #         user_id, username, text
         #     )
-
-
 
     async def close(self):
         """Закрывает соединение."""

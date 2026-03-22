@@ -2,6 +2,16 @@ from aiogram import Router, F
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from src.create_bot import pg_db
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.context import FSMContext
+from aiogram.filters import StateFilter
+# from aiogram.filters import BaseFilter
+from aiogram.types import (
+    # KeyboardButton,
+    # ReplyKeyboardMarkup,
+    ReplyKeyboardRemove
+)
+
 # import asyncpg
 # from src.db_handler.db_class import .create_table_create
 
@@ -13,19 +23,23 @@ start_router = Router()
 
 # create_table = pg_db.execute_query()
 
+class UserState(StatesGroup):
+    unstarted = State()
+
+
 
 @start_router.message(CommandStart())
-async def cmd_start(message: Message):
-    await message.answer('Привет, введите ФИО, и номер телефона')
+async def cmd_start(message: Message, state: FSMContext) -> None:
+    # await message.answer('Привет, введите ФИО, и номер телефона')
+    await state.set_state(UserState.unstarted)
+    await message.answer(
+        "Привет, введите ФИО, и номер телефона",
+        reply_markup=ReplyKeyboardRemove(),
+    )
 
 
-
-# @start_router.message(Command('start_2'))
-# async def cmd_start_2(message: Message):
-#     await message.answer('Запуск сообщения по команде /start_2 используя фильтр Command()')
-#
-@start_router.message(F.text)
-async def save_db(message: Message):
+@start_router.message(F.text, UserState.unstarted)
+async def save_db(message: Message) -> None:
     # user_text = message.text
     # print(type(user_text))
     # await message.answer(f"You read {user_text}")
@@ -43,4 +57,10 @@ async def save_db(message: Message):
 
     # print(a)
 
-    await message.answer('Сообщение отправлено')
+    await message.answer('Сообщение отправлено',
+                         reply_markup = ReplyKeyboardRemove())
+
+
+@start_router.message(F.text, StateFilter(None))
+async def handle_all_messages(message: Message) -> None:
+    await message.answer(f"Сначала нажмите /start, чтобы запустить бота.")
