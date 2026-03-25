@@ -48,4 +48,4 @@ pip install -r requirements.txt
 python src/aiogram_run.py
 ```
 
-В тг бота нужно ввести команду /start
+В тг бота нужно ввести команду ```/start```
