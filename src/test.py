@@ -1,6 +1,11 @@
 import sqlalchemy
+import os
+from dotenv import load_dotenv
 
-db_url = "postgresql://roman:1712@localhost:5432/db_telegram_bot"
+load_dotenv()
+
+
+db_url = os.getenv('PG_LINK')
 
 try:
     engine = sqlalchemy.create_engine(db_url)
