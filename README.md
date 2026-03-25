@@ -19,8 +19,8 @@ ________________________________________________________________________________
 ## .env файл
 
 ### Пример .env файла
-bash 
-```
+
+```bash
 TOKEN=ваш_токен_от_botfather
 ADMINS=00000000,000000001
 PG_LINK=postgresql://USER_LOGIN:USER_PASSWORD@HOST_API:PORT/NAME_BD
@@ -35,12 +35,16 @@ python -m venv venv
 source venv/bin/activate  # Для Linux/macOS
 venv\Scripts\activate  # Для Windows
 
-bash
-```pip install -r requirements.txt```
+
+```bash
+pip install -r requirements.txt
+```
 
 ______________________________________________________________________________________________________________________
 
 ## Запуск программы
 
-bash
-```python src/aiogram_run.py```
+
+```bash
+python src/aiogram_run.py
+```
