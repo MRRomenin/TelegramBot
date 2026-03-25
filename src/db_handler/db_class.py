@@ -47,15 +47,16 @@ class PostgresHandler:
         """Выполняет SQL-запрос."""
         await self.connect()
         query_add = add_message()
-
+        query_create_table = create_table_create()
         if self.connection:
             try:
+                await self.connection.execute(query_create_table)
                 await self.connection.execute(query_add, username, text)
                 print("выполнение запроса записи в customer")
-                # self.connection.commit()
+
             except ErrorConnect as e:
                 print(f"Ошибка выполнения запроса: {e}")
-                # self.connection.rollback()
+
 
 
         # await message.answer("Сообщение сохранено в базе данных!")
