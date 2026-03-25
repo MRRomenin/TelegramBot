@@ -33,7 +33,7 @@ async def cmd_start(message: Message, state: FSMContext) -> None:
     # await message.answer('Привет, введите ФИО, и номер телефона')
     await state.set_state(UserState.unstarted)
     await message.answer(
-        "Привет, введите ФИО, и номер телефона",
+        "Привет, введите ФИО, и номер телефона через запятуюч",
         reply_markup=ReplyKeyboardRemove(),
     )
 
@@ -44,10 +44,11 @@ async def save_db(message: Message) -> None:
     # print(type(user_text))
     # await message.answer(f"You read {user_text}")
     # user_id = message.from_user.id
-    username = message.from_user.username
+    # username = message.from_user.username
+    # name = message.text
     text = message.text
-
-    await pg_db.execute_query(username, text)
+    data_list = [item.strip() for item in text.split(',')]
+    await pg_db.execute_query(data_list[0], data_list[1])
 
     # mess = pg_db.add_message(user_id, username, text)
     # await pg_db.execute_query.add_message(user_id, username, text)

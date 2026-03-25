@@ -14,6 +14,15 @@ def add_message() -> str:
     """Записывает сообщение в БД."""
     return "INSERT INTO customer (name, number_phone) VALUES ($1, $2)"
 
+def create_table_create() -> str:
+    create_table_query = """
+        CREATE TABLE IF NOT EXISTS customer 
+            (
+                id SERIAL PRIMARY KEY, name TEXT NOT NULL, \
+                number_phone TEXT NOT NULL);
+                """
+    return create_table_query
+
 
 class PostgresHandler:
     def __init__(self, configs):
@@ -32,20 +41,13 @@ class PostgresHandler:
             self.connection = None
 
 
-    async def create_table_create(self) -> str:
-        create_table_query = """
-            CREATE TABLE IF NOT EXISTS customer (
-                id SERIAL PRIMARY KEY,
-                name TEXT NOT NULL,
-                number_phone TEXT NOT NULL
-            );
-            """
-        return create_table_query
+
 
     async def execute_query(self, username, text) -> None:
         """Выполняет SQL-запрос."""
         await self.connect()
         query_add = add_message()
+
         if self.connection:
             try:
                 await self.connection.execute(query_add, username, text)
