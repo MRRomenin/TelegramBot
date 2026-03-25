@@ -11,7 +11,8 @@
 
 ### Клонирование репозитория
 ```bash
-git clone [https://github.com/ваш-логин/название-репозитория.git](https://github.com/ваш-логин/название-репозитория.git)
+git clone [https://github.com/ваш-логин/название-репозитория.git]
+(https://github.com/ваш-логин/название-репозитория.git)
 cd название-репозитория
 ```
 
@@ -29,10 +30,9 @@ PG_LINK=postgresql://USER_LOGIN:USER_PASSWORD@HOST_API:PORT/NAME_BD
 
 ### Рекомендуется использовать виртуальное окружение:
 
-python -m venv venv
-source venv/bin/activate  # Для Linux/macOS
+python -m venv venv  
+source venv/bin/activate  # Для Linux/macOS  
 venv\Scripts\activate  # Для Windows
-
 
 ```bash
 pip install -r requirements.txt
