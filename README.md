@@ -30,7 +30,9 @@ PG_LINK=postgresql://USER_LOGIN:USER_PASSWORD@HOST_API:PORT/NAME_BD
 
 ### Рекомендуется использовать виртуальное окружение:
 
-python -m venv venv  
+```bash
+python -m venv venv
+```  
 source venv/bin/activate  # Для Linux/macOS  
 venv\Scripts\activate  # Для Windows
 
